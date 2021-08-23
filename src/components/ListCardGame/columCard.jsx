@@ -21,7 +21,7 @@ function ColumCard({objecto}) {
 
   return (
     <>
-      <div className="gap-3">
+      <div className="gap-3 z-0">
         {
          
           objecto.map(elem => {
@@ -33,6 +33,9 @@ function ColumCard({objecto}) {
                   platforms={elem.platforms}
                   metacritic={elem.metacritic}
                   name={elem.name}
+                  released={elem.released}
+                genres={elem.genres}
+                ratings={elem.ratings}
                 />
           )
         }) }

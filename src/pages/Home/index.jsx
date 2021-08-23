@@ -1,81 +1,43 @@
 import Header from '../../components/Header/index'
-
+import DropTop from "../../components/drowptop/Drowtop"
 import ListCards from "../../components/ListCardGame/index"
+import Nav from "../../components/aside/nav"
 export default function Home() {
-
+  const orderby = ["Relevance", "Date add", "Name", "Release Date", "populaty", "Average rating"]
   return (
     <>
       <div>
         <Header />
       </div>
-      <section className="flex">
+      <section className="flex z-0">
         <div>
-          <aside className="aside-menu text-white text-3xl w-56">
-              <nav>
-                <div>Home</div>
-                <div>reviem</div>
+          <aside className="text-white  w-56 relative top-10 left-6 flex justify-start">
+              <nav> 
+              <div className="text-3xl font-bold my-3 hover:text-gray-500 cursor-pointer">
+                <span>
+                Home
+                </span>
+              </div>
+              <div className="text-3xl font-bold my-3 hover:text-gray-500 cursor-pointer">
+                <span>
+                Reviens
+                </span>
+              </div>
                 <div className="menu">
-                    <div>
-                        <span>New releases</span>
-                        <ul>
-                          <li>last 30 years</li>
-                          <li>this week</li>
-                          <li>next week</li>
-                          <li>realse calendar</li>
-                          </ul>
-                    </div>
-                    <div>
-                      <span>Top</span>
-                      <ul>
-                        <li>the best of year</li>
-                        <li>popular in 2020</li>
-                        <li>all time top 250</li>
-                      </ul>
-                  </div>
-                  <div>
-                    <span>All Games</span>
-                </div>
-                <div>
-                  <span>browse</span>
-                  <ul>
-                    <li>plataforms</li>
-                    <li>Store</li>
-                    <li>collection</li>
-                    <li>reviems</li>
-                    <li>Genres</li>
-                    <li>creators</li>
-                    <li>tags</li>
-                    <li>developers</li>
-                    <li>publishers</li>
-                    <div>
-                      <span>hide</span>
-                    </div>
-                  </ul>
-                </div>
-                <div>
-                  <span>platforms</span>
-                  <ul>
-                    <li>pc</li>
-                    <li>playStation 4</li>
-                    <li>xbox one</li>
-                    <li>Nintendo switch</li>
-                    <li>ios</li>
-                    <li>android</li>
-                    <div>
-                      <span>hide</span>
-                    </div>
-                  </ul>
-                </div>
+                    <Nav />
                 </div>
               </nav>
             </aside>
-        </div>
+    </div>
         <div>
           <div className="text-white">
-            <span className="text-7xl font-bold font-sans">
+            <span className="text-7xl font-extrabold font-sans block">
             New and Trending
             </span>
+            <span className="my-5 text-lg block">Based on player counts and release date</span>
           </div>
+          <DropTop ordenby={orderby} title={"order by : "} />
+          <DropTop ordenby={orderby} title={""}/>
           <ListCards />
         </div>
       </section>
