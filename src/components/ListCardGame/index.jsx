@@ -7,7 +7,8 @@ function ListCardGame() {
   console.log(loading);
   function filtro(objecto,inicio) {
       const elementFilter =  objecto.filter((elemet, index) => {
-         if (index >= inicio && index < inicio+5) return elemet
+        if (index >= inicio && index < inicio + 5) return elemet
+        return ""
       })
        return elementFilter
     }
@@ -30,7 +31,7 @@ function ListCardGame() {
                 />
               );
             }) */
-        (<div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 m-3">
+        (<div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 m-3">
         
             <div>
             <ColumCard objecto={filtro(cards,0)} />

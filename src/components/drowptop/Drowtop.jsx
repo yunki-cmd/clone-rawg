@@ -30,7 +30,7 @@ function Example({ title = "category" } = {},{ ordenby = ["Relevance", "Date add
   }
 
   return (
-    <Menu as="div" className="relative inline-block text-left m-1">
+    <Menu as="div" className="relative inline-block text-left m-1 z-10">
       <div>
         <Menu.Button className="inline-flex justify-center w-full rounded-md  shadow-sm px-4 py-2 bg-gray-900 text-sm font-medium text-white focus:outline-none">
           {title}<span className="font-bold">

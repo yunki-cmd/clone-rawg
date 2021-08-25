@@ -21,7 +21,7 @@ function ColumCard({objecto}) {
 
   return (
     <>
-      <div className="gap-3 z-0">
+      <div className="z-0">
         {
          
           objecto.map(elem => {

@@ -1,11 +1,7 @@
-
-import logonitendo from "../../public/assets/icons/nintendo.svg";
-import logoxbox from "../../public/assets/icons/xbox.svg";
-import logopc from "../../public/assets/icons/pc.svg";
-import logoplaystation from "../../public/assets/icons/playstation.svg";
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { Suspense, useCallback, useState } from "react";
 import "./index.css"
-
+import Trailer from "../Trailer/index"
+import Loading from "../loading/loading";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -23,7 +19,8 @@ function CardGame({ id,
           name,}) {
   
   const [collapse, setcollapse] = useState(false)
-  const [menus,setmenus] = useState(false)
+
+
   const score = useCallback(function (score) {
     const score2 = parseInt(score);
     if (score2 <= 50) return "text-red-500 border-red-500";
@@ -31,10 +28,7 @@ function CardGame({ id,
     return "text-green-500 border-green-500";
   }, [])
 
-  useEffect(() => {
-    collapse ? setmenus(true) : setmenus(false)
-    
-  }, [collapse])
+
 
   const handlericons = useCallback(function (rating_id) {
     const icons = {
@@ -48,55 +42,61 @@ function CardGame({ id,
   
   const plataformas = useCallback(function (id) {
     const plataforms = {
-      7: logonitendo,
-      1: logoxbox,
-      4: logopc,
-      18: logoplaystation,
-      default:logonitendo
+      7: "./assets/icons/nintendo.svg",
+      1: "./assets/icons/xbox.svg",
+      4: "./assets/icons/pc.svg",
+      18: "./assets/icons/playstation.svg",
+      arrow:"./assets/icons/flecha.svg",
     };
-    return plataforms[id] || plataforms["default"]
+    return plataforms[id]
   }, [])
   
 
   const handlerMouseEnter = useCallback(function (e) {
-
     setcollapse(true)
-
   }, [])
   const handlerMouseLeft = useCallback(function (e) {
- 
     setcollapse(false)
   },[])
 
 
-  
+
   return (
     <>
-      <div className={classNames(menus ? "my-4 transition duration-500 ease-in-out transform  hover:scale-105    z-20 max-h-96  relative" : "my-4 relative z-1" )}  key={id} onMouseEnter={handlerMouseEnter} onMouseLeave={handlerMouseLeft} >
-        <div className="flex flex-col text-white rounded-lg">
+      <div style={{ backgroundColor: "#202020" }} className={classNames(collapse ? "my-4 transition duration-700 ease-in-out transform  hover:scale-105 z-10 max-h-80 min-h-full  relative rounded-lg" : "my-6 relative z-1 rounded-lg min-h-full" )}  key={id} onMouseEnter={handlerMouseEnter} onMouseLeave={handlerMouseLeft} >
+        <div className="flex flex-col text-white rounded-lg min-h-full">
+          {collapse ? <Suspense fallback={Loading}><Trailer id={id} /> </Suspense> : (
           <div>
-            <img className="rounded-xl" src={background_image} alt={slug} />
-          </div>
-          <div style={{ backgroundColor:"#151515"}}>
+            <img className="rounded-t-lg" src={background_image} alt={slug} />
+          </div>) 
+          }
+          <div style={{ backgroundColor:"#202020"}} className="rounded-lg">
             <div className="flex gap-1 my-3">
               {platforms.map((elem) => {
-                return (
-                  <div className="p-1" key={elem.platform.id}>
-                    <img
-                      className="h-5 w-5"
-                      src={plataformas(elem.platform.id)}
-                      alt={elem.platform.name}
-                    />
-                  </div>
-                );
+                const id = elem.platform.id
+                const img = plataformas(id)
+                if (img) {
+                  return (
+                    <div className="p-1" key={id}>
+                      <img
+                        className="h-5 w-5"
+                        src={img}
+                        alt={elem.platform.name}
+                      />
+                    </div>
+                  );
+                }
+                return null
               })}
+              { metacritic ? (
               <div
                 className={` font-bold tracking-wider border p-1 ${score(
                   metacritic
                 )} `}
               >
                 {metacritic}
-              </div>
+              </div>) : null
+              }
             </div>
             <div className="capitalize text-2xl font-bold my-3 flex items-center">
               <span>{name}</span>
@@ -104,7 +104,9 @@ function CardGame({ id,
                 <img className="h-full w-5" src={handlericons(ratings[0].id)} alt={ratings[0].title} />
             </div>
             </div>
-            {menus ? (<><div className="m-1 text-gray-500 text-opacity-60">
+            
+              <div className="m-1 text-gray-500 text-opacity-60 rounded-lg">
+                {collapse ? (<>
               <div className="flex justify-between border-b-2 border-gray-500 border-opacity-50 m-1">
                 <span className="p-1 py-2">Release</span>
                 <span>{released}</span>
@@ -117,12 +119,18 @@ function CardGame({ id,
                   })}
                 </div>
               </div> 
-              <div className="flex justify-between border-b-2 border-gray-500 border-opacity-50 m-1">
+              <div className="flex justify-between   border-opacity-50 m-1">
                 <span className="p-1 py-2">Chart</span>
                 <span>top</span>
-                </div> 
+                </div> </>) : null}
+              <a href="http://" className={classNames(collapse ? "block" : "hidden")}>
+                  <div className="bg-gray-600 m-4 my-2 mb-5 p-2 rounded-lg flex justify-between">
+                    <span className="text-white text-sm">Show more like this</span>
+                    <span className="h-3 w-3 mr-2"><img src={plataformas("arrow")} alt=""  /></span>
+                  </div>
+                </a>
             </div>
-            </>) : null}
+            
           </div>
         </div>
       </div>

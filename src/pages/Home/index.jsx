@@ -29,7 +29,7 @@ export default function Home() {
               </nav>
             </aside>
     </div>
-        <div>
+        <div className="mx-8">
           <div className="text-white">
             <span className="text-7xl font-extrabold font-sans block">
             New and Trending
