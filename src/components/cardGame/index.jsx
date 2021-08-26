@@ -65,11 +65,10 @@ function CardGame({ id,
     <>
       <div style={{ backgroundColor: "#202020" }} className={classNames(collapse ? "my-4 transition duration-700 ease-in-out transform  hover:scale-105 z-10 max-h-80 min-h-full  relative rounded-lg" : "my-6 relative z-1 rounded-lg min-h-full" )}  key={id} onMouseEnter={handlerMouseEnter} onMouseLeave={handlerMouseLeft} >
         <div className="flex flex-col text-white rounded-lg min-h-full">
-          {collapse ? <Suspense fallback={Loading}><Trailer id={id} /> </Suspense> : (
           <div>
-            <img className="rounded-t-lg" src={background_image} alt={slug} />
-          </div>) 
-          }
+            <img className={classNames(collapse ? "hidden transition duration-700 ease-in-out" :"block rounded-t-lg")} src={background_image} alt={slug} />
+            {collapse && <Suspense fallback={Loading}><Trailer id={id} /> </Suspense>}
+          </div>
           <div style={{ backgroundColor:"#202020"}} className="rounded-lg">
             <div className="flex gap-1 my-3">
               {platforms.map((elem) => {
@@ -101,7 +100,7 @@ function CardGame({ id,
             <div className="capitalize text-2xl font-bold my-3 flex items-center">
               <span>{name}</span>
               <div role="button" className="inline-block self-center p-1">
-                <img className="h-full w-5" src={handlericons(ratings[0].id)} alt={ratings[0].title} />
+                <img className="h-full w-5" src={handlericons(ratings[0]?.id)} alt={ratings[0]?.title} />
             </div>
             </div>
             

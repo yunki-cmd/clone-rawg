@@ -1,6 +1,7 @@
 import fetchVideos from "../../services/fetchVideos/fetchVideos";
 import fetchImages from "../../services/fetchImages/fetchImages";
 import Loading from "../loading/loading"
+import Carrousel from "../carrousel/carrousel";
 import {
   useEffect,
   useState
@@ -35,13 +36,13 @@ const Trailer = ({id}) => {
 
   if (url !== "") {
     return (
-      <video src={url} autoPlay muted loop></video>
+      <video className="h-72 rounded-t-lg" src={url} autoPlay muted loop></video>
     )
   }
 
   if (Object.keys(imgs).length > 0) {
     return (
-      <img src={imgs[0].image} alt={imgs[0].id} />
+      <Carrousel imgs={imgs} ></Carrousel>
     )
   }
   return (
