@@ -25,7 +25,6 @@ function Example({ title = "category" } = {},{ ordenby = ["Relevance", "Date add
 
   const updateState = (event) => {
     const payload = event.target.textContent
-    console.log(payload);
     dispatch({type:"update",payload:payload})
   }
 

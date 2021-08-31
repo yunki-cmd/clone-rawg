@@ -1,14 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import Search from '../Search/index'
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
     <>
       <header className="my-8 flex text-white ">
         <div className="flex text-white ml-10 mx-3">
+          <Link to="/">
           <span className="uppercase font-bold text-3xl tracking-space2">
             Rawg
           </span>
+          </Link>
         </div>
         <div className="rounded bg-white text-black capitalize flex justify-center items-center pr-3 overflow-hidden text-sm mx-2">
           <a href="#" className="flex whitespace-nowrap">

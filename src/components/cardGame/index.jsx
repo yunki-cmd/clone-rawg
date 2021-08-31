@@ -16,7 +16,7 @@ function CardGame({ id,
           slug,
           platforms,
           metacritic,
-          name,}) {
+          name}) {
   
   const [collapse, setcollapse] = useState(false)
 
@@ -32,23 +32,27 @@ function CardGame({ id,
 
   const handlericons = useCallback(function (rating_id) {
     const icons = {
-      1: "./assets/icons/skip.png",
-      3: "./assets/icons/meh.webp",
-      4: "./assets/icons/recommended.png",
-      5: "./assets/icons/excepcional.png"
+      1: "/assets/icons/skip.png",
+      3: "/assets/icons/meh.webp",
+      4: "/assets/icons/recommended.png",
+      5: "/assets/icons/excepcional.png",
     }
     return icons[rating_id]
   }, [])
   
-  const plataformas = useCallback(function (id) {
+  const plataformas = useCallback(function (name) {
+    const name1 = name.split(" ")
     const plataforms = {
-      7: "./assets/icons/nintendo.svg",
-      1: "./assets/icons/xbox.svg",
-      4: "./assets/icons/pc.svg",
-      18: "./assets/icons/playstation.svg",
-      arrow:"./assets/icons/flecha.svg",
+      Nintendo: "/assets/icons/nintendo.svg",
+      Xbox: "/assets/icons/xbox.svg",
+      PC: "/assets/icons/pc.svg",
+      PlayStation: "/assets/icons/playstation.svg",
+      linux: "/assets/icons/linux.svg",
+      iOS: "/assets/icons/apple.svg",
+      arrow: "/assets/icons/flecha.svg",
+      macOS: "/assets/icons/apple.svg",
     };
-    return plataforms[id]
+    return plataforms[name1[0]]
   }, [])
   
 
@@ -63,8 +67,8 @@ function CardGame({ id,
 
   return (
     <>
-      <div style={{ backgroundColor: "#202020" }} className={classNames(collapse ? "my-4 transition duration-700 ease-in-out transform  hover:scale-105 z-10 max-h-80 min-h-full  relative rounded-lg" : "my-6 relative z-1 rounded-lg min-h-full" )}  key={id} onMouseEnter={handlerMouseEnter} onMouseLeave={handlerMouseLeft} >
-        <div className="flex flex-col text-white rounded-lg min-h-full">
+      <div style={{ backgroundColor: "#202020" }} className={classNames(collapse ? "my-4 transition duration-700 ease-in-out transform  hover:scale-105 z-10 max-h-80 relative rounded-lg" : "my-6 relative z-1 rounded-lg " )}  key={id} onMouseEnter={handlerMouseEnter} onMouseLeave={handlerMouseLeft} >
+        <div className="flex flex-col text-white rounded-lg ">
           <div>
             <img className={classNames(collapse ? "hidden transition duration-700 ease-in-out" :"block rounded-t-lg")} src={background_image} alt={slug} />
             {collapse && <Suspense fallback={Loading}><Trailer id={id} /> </Suspense>}
@@ -72,15 +76,15 @@ function CardGame({ id,
           <div style={{ backgroundColor:"#202020"}} className="rounded-lg">
             <div className="flex gap-1 my-3">
               {platforms.map((elem) => {
-                const id = elem.platform.id
-                const img = plataformas(id)
+                const name = elem?.platform?.name
+                const img = plataformas(name)
                 if (img) {
                   return (
-                    <div className="p-1" key={id}>
+                    <div className="p-1" key={name}>
                       <img
                         className="h-5 w-5"
                         src={img}
-                        alt={elem.platform.name}
+                        alt={elem?.platform?.name}
                       />
                     </div>
                   );
@@ -94,8 +98,8 @@ function CardGame({ id,
                 )} `}
               >
                 {metacritic}
-              </div>) : null
-              }
+                </div>) : null
+              } 
             </div>
             <div className="capitalize text-2xl font-bold my-3 flex items-center">
               <span>{name}</span>

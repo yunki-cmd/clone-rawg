@@ -6,6 +6,7 @@ import "./App.css";
 
 ////pages////
 import Home from "./pages/Home/index";
+import Search from "./pages/busquedaResultados/ResultadosBusqueda"
 
 function App() {
   return (
@@ -13,12 +14,9 @@ function App() {
       <CardsContextProvider>
         <Router>
           <Switch>
-            <Route path="/" exact>
-              <Home />
-            </Route>
-            <Route path="/home">
-              <div className="text-white">home</div>
-            </Route>
+            <Route path="/" exact component={Home}></Route>
+            <Route path="/home" component={Home}></Route>
+            <Route Route path = "/search/:query"component = {Search}></Route>
           </Switch>
         </Router>
       </CardsContextProvider>

@@ -1,8 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { Contexto } from "../../context/cardGameContext/index"
 import fetchGame from "../../services/fethallgame/index"
+
+const Initial_Page = 1;
+
 function useAllGame() {
   
+  const [nextPage, setNextPage] = useState(Initial_Page)
   const { dispatch } = useContext(Contexto);
   const {cards} = useContext(Contexto).cards
   const [loading,setloading] = useState(true)
@@ -10,7 +14,6 @@ function useAllGame() {
     if (cards.length === 0) { 
       fetchGame()
         .then(resp => {
-          console.log(resp.data.results)
           dispatch({
             type: "loading",
             payload: resp.data.results
@@ -23,8 +26,18 @@ function useAllGame() {
     }
   }, [cards, dispatch]);
 
+  useEffect(() => {
+    if (Initial_Page === nextPage) return
+    fetchGame({ page: nextPage })
+      .then(resp => {
+      dispatch({
+        type: "nextPage",
+        payload: resp.data.results
+      })
+    })
 
+  }, [nextPage,dispatch])
   
-  return { cards,loading };
+  return { cards,loading,setNextPage };
 }
 export default useAllGame

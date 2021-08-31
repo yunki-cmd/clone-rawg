@@ -2,8 +2,18 @@ import Header from '../../components/Header/index'
 import DropTop from "../../components/drowptop/Drowtop"
 import ListCards from "../../components/ListCardGame/index"
 import Nav from "../../components/aside/nav"
+import useAllGame from "../../hooks/GetallGame/useAllGame"
+import { useCallback } from 'react'
+
 export default function Home() {
+  console.log("home")
+  const {cards,loading,setNextPage } = useAllGame()
   const orderby = ["Relevance", "Date add", "Name", "Release Date", "populaty", "Average rating"]
+
+  const handlerNextPage = useCallback(() => {
+    setNextPage((previos) =>  previos+1)
+  }, [setNextPage])
+
   return (
     <>
       <div>
@@ -38,7 +48,10 @@ export default function Home() {
           </div>
           <DropTop ordenby={orderby} title={"order by : "} />
           <DropTop ordenby={orderby} title={""}/>
-          <ListCards />
+          <ListCards cards={cards} loading={loading} />
+          <div>
+            <button onClick={handlerNextPage} className="border-2 border-indigo-50 p-2 text-white">Siguiente</button>
+          </div>
         </div>
       </section>
     </>
