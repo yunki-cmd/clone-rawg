@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {CardsContextProvider} from "./context/cardGameContext/index"
+import { CardsContextProvider } from "./context/cardGameContext/index"
+import { Fecha } from "./context/fecha/fecha"
 // css
 
 import "./App.css";
@@ -12,14 +13,16 @@ function App() {
   return (
     <div className="h-screen">
       <CardsContextProvider>
-        <Router>
+        <Fecha>
+          <Router>
           <Switch>
-            <Route path="/" exact component={Home}></Route>
-            <Route path="/home" component={Home}></Route>
-            <Route Route path = "/search/:query"component = {Search}></Route>
-          </Switch>
-        </Router>
-      </CardsContextProvider>
+              <Route path="/" exact component={Home}></Route>
+              <Route path="/home" component={Home}></Route>
+              <Route Route path = "/search/:query"component = {Search}></Route>
+            </Switch>
+          </Router>
+          </Fecha>
+        </CardsContextProvider>
     </div>
   );
 }

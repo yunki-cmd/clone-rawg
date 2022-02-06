@@ -1,4 +1,4 @@
-import { Fragment, useReducer } from 'react'
+import React,{ Fragment, useReducer } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 
 
@@ -71,4 +71,4 @@ function Example({ title = "category" } = {},{ ordenby = ["Relevance", "Date add
     </Menu>
   )
 }
-export default Example
+export default React.memo(Example)

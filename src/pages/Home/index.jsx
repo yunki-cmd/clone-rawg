@@ -6,7 +6,7 @@ import useAllGame from "../../hooks/GetallGame/useAllGame"
 import { useCallback } from 'react'
 
 export default function Home() {
-  console.log("home")
+
   const {cards,loading,setNextPage } = useAllGame()
   const orderby = ["Relevance", "Date add", "Name", "Release Date", "populaty", "Average rating"]
 

@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import Search from '../Search/index'
 import { Link } from 'react-router-dom';
+import React from 'react';
 
-export default function Header() {
+export default React.memo(function Header() {
   return (
     <>
       <header className="my-8 flex text-white ">
@@ -42,4 +43,4 @@ export default function Header() {
       </header>
     </>
   );
-}
+})
